@@ -8,14 +8,16 @@ public protocol DeviceProtocol {
     var capabilities: [DeviceCapability] { get }
 }
 
-public enum DeviceType {
-    case iPhone
-    case iPad
-    case watch
+public enum DeviceType: String {
+    case iPhone = "iphone"
+    case iPad = "ipad"
+    case watch = "watch"
+    case mac = "mac"
 }
 
-public enum DeviceCapability {
-    case video
-    case lidar
-    case motion
+public enum DeviceCapability: String {
+    case video = "video"
+    case lidar = "lidar"
+    case motion = "motion"
+    case control = "control"
 } 

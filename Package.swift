@@ -9,12 +9,11 @@ let package = Package(
     ],
     products: [
         .library(name: "LogbotCore", targets: ["LogbotCore"]),
-        .library(name: "LogbotCapture", targets: ["LogbotCapture"]),
-        .library(name: "LogbotControl", targets: ["LogbotControl"])
+        .executable(name: "LogbotCapture", targets: ["LogbotCaptureApp"]),
+        .executable(name: "LogbotControl", targets: ["LogbotControlApp"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-        .package(url: "https://github.com/NextLevel/NextLevel.git", from: "0.16.3")
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
     ],
     targets: [
         // Core Framework
@@ -22,28 +21,19 @@ let package = Package(
             name: "LogbotCore",
             dependencies: [
                 .product(name: "Logging", package: "swift-log")
-            ],
-            path: "Sources/LogbotCore"
-        ),
-        .testTarget(
-            name: "LogbotCoreTests",
-            dependencies: ["LogbotCore"],
-            path: "Tests/LogbotCore"
+            ]
         ),
         
         // iOS Capture App
         .target(
             name: "LogbotCapture",
             dependencies: [
-                "LogbotCore",
-                "NextLevel"
-            ],
-            path: "Sources/LogbotCapture"
+                "LogbotCore"
+            ]
         ),
-        .testTarget(
-            name: "LogbotCaptureTests",
-            dependencies: ["LogbotCapture"],
-            path: "Tests/LogbotCapture"
+        .executableTarget(
+            name: "LogbotCaptureApp",
+            dependencies: ["LogbotCapture"]
         ),
         
         // macOS Control App
@@ -51,13 +41,11 @@ let package = Package(
             name: "LogbotControl",
             dependencies: [
                 "LogbotCore"
-            ],
-            path: "Sources/LogbotControl"
+            ]
         ),
-        .testTarget(
-            name: "LogbotControlTests",
-            dependencies: ["LogbotControl"],
-            path: "Tests/LogbotControl"
+        .executableTarget(
+            name: "LogbotControlApp",
+            dependencies: ["LogbotControl"]
         )
     ]
 ) 
