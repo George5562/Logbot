@@ -1,0 +1,106 @@
+# Robot Training Data Collection Plan
+
+## 1. Core Technologies & Repositories
+
+### Device Communication
+- **MultipeerKit** ([GitHub](https://github.com/insidegui/MultipeerKit))
+  - Purpose: iOS device discovery and communication over Wi-Fi/Bluetooth
+
+### Data Capture
+- **ARKit-SceneDepth** ([GitHub](https://github.com/mhanberg/ARKit-SceneDepth))
+  - Purpose: Synchronized LiDAR depth maps and video capture
+- **NextLevel** ([GitHub](https://github.com/NextLevel/NextLevel))
+  - Purpose: Advanced video recording for iOS devices
+- **MotionCollector** ([GitHub](https://github.com/bradhowes/MotionCollector))
+  - Purpose: Apple Watch motion data collection
+
+### Synchronization
+- **NTPKit** ([GitHub](https://github.com/FreddieHKW/NTPKit))
+  - Purpose: Device clock synchronization
+
+## 2. System Architecture
+
+### Data Collection Components
+1. **iPhone**
+   - Video recording
+   - LiDAR depth capture
+   - Watch data relay
+2. **iPads** (2x)
+   - Multi-angle video capture
+3. **Apple Watch**
+   - Motion data collection
+4. **MacBook**
+   - Central control station
+   - FTP server
+   - Data storage
+
+### File Structure
+```
+/Session_<Timestamp>/
+    iPhone/
+        video.mp4
+        lidar.ply
+    iPad1/
+        video.mp4
+    iPad2/
+        video.mp4
+    Watch/
+        motion_data.csv
+```
+
+### Session Metadata
+```json
+{
+    "session_id": "Session_2024-12-05_15:30",
+    "devices": ["iPhone", "iPad1", "iPad2", "Apple Watch"],
+    "start_time": "2024-12-05T15:30:00Z",
+    "end_time": "2024-12-05T15:45:00Z"
+}
+```
+
+## 3. Implementation Steps
+
+1. **Device Communication Setup**
+   - Implement MultipeerKit for device discovery
+   - Configure session management
+   - Setup command distribution
+
+2. **Data Capture Implementation**
+   - iPhone: Configure LiDAR + video capture
+   - iPads: Setup video recording
+   - Watch: Implement motion data collection
+
+3. **Synchronization System**
+   - Setup NTP server on MacBook
+   - Configure device synchronization
+   - Implement timestamp alignment
+
+4. **File Transfer System**
+   - Configure MacBook FTP server
+   - Implement automatic file upload
+   - Setup session folder organization
+
+5. **Control Interface**
+   - Develop MacBook control app
+   - Implement recording triggers
+   - Add status monitoring
+   - Create file organization system
+
+## 4. Best Practices
+
+1. **Data Collection**
+   - Maintain consistent lighting conditions
+   - Use stable device mounts
+   - Verify synchronization before sessions
+
+2. **Data Management**
+   - Immediate data offloading
+   - Regular backup creation
+   - Structured metadata maintenance
+
+3. **Quality Control**
+   - Pre-session device checks
+   - Regular synchronization verification
+   - Post-session data validation
+```
+
